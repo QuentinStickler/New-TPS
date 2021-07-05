@@ -43,7 +43,31 @@
                     "id": "4ed60efb-28d0-4523-9c51-c03f412b2e36",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press,Hold"
+                },
+                {
+                    "name": "SprintStart",
+                    "type": "Button",
+                    "id": "a94c3602-a413-4706-b700-7ece0386724b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "SprintFinish",
+                    "type": "Button",
+                    "id": "2b2f2d0f-6a04-45fb-930a-435c09a27d41",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)"
+                },
+                {
+                    "name": "ShootStop",
+                    "type": "Button",
+                    "id": "60abb36d-4cf1-4472-9068-e26aa8bf2302",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)"
                 }
             ],
             "bindings": [
@@ -143,6 +167,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "25226e3a-7637-4a3a-a577-2c246f2659ca",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SprintStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "19ac39ef-d96f-415b-9def-69f3ae79ae9b",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SprintFinish",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05eb365d-8a6c-4ccb-9410-c6e09ddc8325",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShootStop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

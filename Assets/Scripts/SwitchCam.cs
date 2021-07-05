@@ -35,6 +35,5 @@ public class SwitchCam : MonoBehaviour
     private void StartAim()
     {
         cam.Priority += 10;
-
     }
 }
