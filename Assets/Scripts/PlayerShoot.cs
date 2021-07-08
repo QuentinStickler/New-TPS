@@ -9,54 +9,114 @@ public class PlayerShoot : MonoBehaviour
     public GameObject bullet;
     PlayerInput playerInput;
     public InputAction shootAction;
-    public InputAction shootStopAction;
+    public InputAction reloadAction;
     public Transform shootingPoint;
     Camera camera;
 
-    private float rateOfFire = 0.3f;
+    private float rateOfFire = 0.1f;
+    private int magazineSize = 30;
+    private float reloadTime = 1.5f;
+    public bool isReloading;
+    private int currentBulletAmount;
     public bool isAutomatic;
+
 
     public float bulletSpeed;
     [SerializeField]
-    private bool allowInvoke;
+    private bool isAttackHeld;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         shootAction = playerInput.actions["Shoot"];
-        shootAction.performed += x => Shoot();
-        shootStopAction = playerInput.actions["ShootStop"];
-        shootStopAction.performed += x => ShootStop();
+        reloadAction = playerInput.actions["Reload"];
         camera = Camera.main;
+        currentBulletAmount = magazineSize;
+    }
+    //Das Shootzeug auslagern und in ne seperate Klasse stecken und von vornerein sagen, ob es automatic sein soll oder nich
+
+    void OnEnable()
+    {
+        shootAction.performed += x => HandleShoot();
+        shootAction.canceled += x => HandleStopShooting();
+        reloadAction.performed += x => StartCoroutine(Reload());
     }
 
-    public void Shoot()
+    void OnDisable()
     {
-        allowInvoke = true;
-        Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        RaycastHit hit;
-        Vector3 targetPoint;
+        shootAction.performed -= x => HandleShoot();
+        shootAction.canceled -= x => HandleStopShooting();
+        reloadAction.performed -= x => StartCoroutine(Reload());
+    }
 
-        if (Physics.Raycast(ray, out hit))
+    IEnumerator AttackHoldCo()
+    {
+        while (isAttackHeld)
         {
-            targetPoint = hit.point;
+            Shoot();
+            yield return new WaitForSeconds(rateOfFire);
         }
-        else targetPoint = ray.GetPoint(100);
+    }
 
-        Vector3 distanceToPoint = targetPoint - shootingPoint.position;
+    public int GetCurrentBullets()
+    {
+        return currentBulletAmount;
+    }
 
-        GameObject bulletInstance = Instantiate(bullet, shootingPoint.position, Quaternion.Euler(90f, 0f, 0f));
-
-        bulletInstance.GetComponent<Rigidbody>().AddForce(distanceToPoint.normalized * bulletSpeed,ForceMode.Impulse);
-
-        Destroy(bulletInstance, 3f);
-
+    public int GetMagazineSize()
+    {
+        return magazineSize;
     }
 
     private void Update()
     {
-        if (isAutomatic && allowInvoke) { Invoke(nameof(Shoot), rateOfFire); }
+        if (currentBulletAmount <= 0 && !isReloading) { isReloading = true; StartCoroutine(Reload()); }
+        //Debug.Log("currentBullets : " + currentBulletAmount);
     }
-    private void ShootStop() { allowInvoke = false; }
+    public void Shoot()
+    {
+        if (!isReloading)
+        {
+            currentBulletAmount--;
+            Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            RaycastHit hit;
+            Vector3 targetPoint;
 
+            if (Physics.Raycast(ray, out hit))
+            {
+                targetPoint = hit.point;
+                Debug.Log(targetPoint);
+            }
+            else targetPoint = ray.GetPoint(100);
+
+            Vector3 distanceToPoint = targetPoint - shootingPoint.position;
+
+            GameObject bulletInstance = Instantiate(bullet, shootingPoint.position, Quaternion.Euler(90f, 0f, 0f));
+
+            bulletInstance.GetComponent<Rigidbody>().AddForce(distanceToPoint.normalized * bulletSpeed, ForceMode.Impulse);
+
+            Destroy(bulletInstance, 3f);
+        }
+    }
+
+    IEnumerator Reload()
+    {
+        isReloading = true;
+        Debug.Log("Reloading");
+        yield return new WaitForSeconds(reloadTime);
+        isReloading = false;
+        currentBulletAmount = magazineSize;
+    }
+    private void HandleShoot()
+    {
+        isAttackHeld = true;
+        StartCoroutine(AttackHoldCo());
+    }
+    private void HandleStopShooting()
+    {
+        if (isAttackHeld)
+        {
+            isAttackHeld = false;
+        }
+    }
 }

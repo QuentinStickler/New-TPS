@@ -62,12 +62,12 @@
                     "interactions": "Press(behavior=1)"
                 },
                 {
-                    "name": "ShootStop",
+                    "name": "Reload",
                     "type": "Button",
-                    "id": "60abb36d-4cf1-4472-9068-e26aa8bf2302",
+                    "id": "315963b4-7d53-413c-a327-3912bd9c6890",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=1)"
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -194,12 +194,12 @@
                 },
                 {
                     "name": "",
-                    "id": "05eb365d-8a6c-4ccb-9410-c6e09ddc8325",
-                    "path": "<Mouse>/leftButton",
+                    "id": "065267c9-8088-4a67-a69b-349b4f4bdff1",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ShootStop",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
