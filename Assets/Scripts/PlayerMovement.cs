@@ -99,13 +99,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void SprintStart()
     {
-        Debug.Log(move);
-        if (preMove.z > 0f && (preMove.x > -0.8 && preMove.x < 0.8) && preMove != Vector3.zero)
+        if (groundedPlayer)
         {
-            isSprinting = true;
-            animator.SetBool("isSprinting", true);
+            if (preMove.z > 0f && (preMove.x > -0.8 && preMove.x < 0.8) && preMove != Vector3.zero)
+            {
+                isSprinting = true;
+                animator.SetBool("isSprinting", true);
+            }
+            else SprintFinish();
         }
-        else SprintFinish();
     }
 
     private void SprintFinish()

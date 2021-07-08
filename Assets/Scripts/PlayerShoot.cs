@@ -71,7 +71,6 @@ public class PlayerShoot : MonoBehaviour
     private void Update()
     {
         if (currentBulletAmount <= 0 && !isReloading) { isReloading = true; StartCoroutine(Reload()); }
-        //Debug.Log("currentBullets : " + currentBulletAmount);
     }
     public void Shoot()
     {
@@ -85,7 +84,6 @@ public class PlayerShoot : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 targetPoint = hit.point;
-                Debug.Log(targetPoint);
             }
             else targetPoint = ray.GetPoint(100);
 
@@ -102,7 +100,6 @@ public class PlayerShoot : MonoBehaviour
     IEnumerator Reload()
     {
         isReloading = true;
-        Debug.Log("Reloading");
         yield return new WaitForSeconds(reloadTime);
         isReloading = false;
         currentBulletAmount = magazineSize;
