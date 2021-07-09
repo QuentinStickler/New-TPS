@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
-    private bool groundedPlayer;
+    private bool groundedPlayer;        
 
     [Header("Player variables")]
     public float playerSpeed;

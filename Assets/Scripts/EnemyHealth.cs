@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
     private float health = 100f;
     private PlayerShoot playerShoot;
+    public bool isRespawnable;
 
     private void Start()
     {
@@ -21,9 +23,13 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        this.gameObject.SetActive(false);
         playerShoot.SetScore(10f);
-        Invoke("Respawn",3f);
+        if (isRespawnable)
+        {
+            this.gameObject.SetActive(false);
+            Invoke("Respawn", 3f);
+        }
+        else Destroy(this.gameObject);
     }
 
     private void Respawn()

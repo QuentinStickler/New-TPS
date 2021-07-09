@@ -1115,7 +1115,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7776023537326159223, guid: 7f9925e97315c4223a60a4e95b12590d, type: 3}
+  shootAction:
+    m_Name: Shoot
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a4fd173b-a717-47e2-afe7-fbb98055bc55
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  reloadAction:
+    m_Name: Reload
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a7e66cfd-fdd0-4b40-b1b0-7dd555a4de9d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
   shootingPoint: {fileID: 0}
+  isReloading: 0
+  isAutomatic: 0
+  bulletSpeed: 0
+  isAttackHeld: 0
 --- !u!1 &2886513499150762133
 GameObject:
   m_ObjectHideFlags: 0
