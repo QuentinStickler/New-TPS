@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,12 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     private float health = 100f;
+    private PlayerShoot playerShoot;
+
+    private void Start()
+    {
+        playerShoot = GameObject.Find("Player").GetComponent<PlayerShoot>();
+    }
 
     public void TakeDamage(float amount)
     {
@@ -14,6 +21,14 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
+        playerShoot.SetScore(10f);
+        Invoke("Respawn",3f);
+    }
+
+    private void Respawn()
+    {
+        this.gameObject.SetActive(true);
+        health = 100f;
     }
 }

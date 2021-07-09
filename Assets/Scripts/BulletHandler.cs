@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletHandler : MonoBehaviour
 {
-    private float damage = 35f;
+    private float damage = 25f;
 
     private void OnCollisionEnter(Collision collision)
     {

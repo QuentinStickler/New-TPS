@@ -14,6 +14,7 @@ public class UiHandler : MonoBehaviour
     public GameObject aimingDecal;
     public TextMeshProUGUI currentBulletsText;
     public TextMeshProUGUI magazineSizeText;
+    public TextMeshProUGUI scoreText;
 
     private PlayerShoot playerShoot;
 
@@ -51,5 +52,6 @@ public class UiHandler : MonoBehaviour
     {
         currentBulletsText.text = playerShoot.GetCurrentBullets().ToString();
         magazineSizeText.text = playerShoot.GetMagazineSize().ToString();
+        scoreText.text = playerShoot.GetScore().ToString();
     }
 }

@@ -16,6 +16,7 @@ public class PlayerShoot : MonoBehaviour
     private float rateOfFire = 0.1f;
     private int magazineSize = 30;
     private float reloadTime = 1.5f;
+    private float score = 0f;
     public bool isReloading;
     private int currentBulletAmount;
     public bool isAutomatic;
@@ -95,6 +96,16 @@ public class PlayerShoot : MonoBehaviour
 
             Destroy(bulletInstance, 3f);
         }
+    }
+
+    public void SetScore(float points)
+    {
+        score += points;
+    }
+
+    public float GetScore()
+    {
+        return score;
     }
 
     IEnumerator Reload()
