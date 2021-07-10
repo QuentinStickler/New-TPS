@@ -13,11 +13,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player variables")]
     public float playerSpeed;
     public float jumpHeight = 1.0f;
-    public float gravityValue = -9.81f;
+    public float gravityValue;
     private float rotationSpeed = 10f;
     private float smoothBlend = 0.2f;
-    private float walkSpeed = 4.5f;
-    private float sprintSpeed = 8f;
+    private float walkSpeed = 4f;
+    private float sprintSpeed = 7f;
     public float maxDistanceToGround;
 
     public LayerMask whatIsGround;
