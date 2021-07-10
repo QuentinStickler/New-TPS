@@ -6,8 +6,7 @@ using UnityEngine;
 public class TurretAI : MonoBehaviour
 {
     private float health = 150f;
-    private float damage = 10f;
-    private float bulletSpeed = 15f;
+    private float bulletSpeed = 20f;
     private bool isAttacking = false;
     private GameObject player;
     public List<Transform> bulletSpawnPoints;

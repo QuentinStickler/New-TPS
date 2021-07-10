@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        Debug.Log("Current health: " + health);
         if(health<= 0f){Debug.Log("You have dieded");}
     }
 }
