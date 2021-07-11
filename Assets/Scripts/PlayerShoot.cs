@@ -86,13 +86,17 @@ public class PlayerShoot : MonoBehaviour
             {
                 targetPoint = hit.point;
             }
-            else targetPoint = ray.GetPoint(100);
+            else targetPoint = ray.GetPoint(75);
 
             Vector3 distanceToPoint = targetPoint - shootingPoint.position;
 
-            GameObject bulletInstance = Instantiate(bullet, shootingPoint.position, Quaternion.Euler(90f, 0f, 0f));
+            GameObject bulletInstance = Instantiate(bullet, shootingPoint.position, Quaternion.Euler(-90,0,0));
 
+            bulletInstance.transform.forward = distanceToPoint.normalized;
+
+            Debug.Log(distanceToPoint.normalized);
             bulletInstance.GetComponent<Rigidbody>().AddForce(distanceToPoint.normalized * bulletSpeed, ForceMode.Impulse);
+            Debug.DrawRay(shootingPoint.transform.position,targetPoint,Color.green,3f);
 
             Destroy(bulletInstance, 3f);
         }

@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class EnemyPatrolAI : MonoBehaviour
 {
     public List<Transform> patrolPoints;
+    public bool shouldWaitOnWalkPoints;
     private float speed = 3f;
     private NavMeshAgent navmeshAgent;
     [SerializeField]
@@ -16,6 +17,8 @@ public class EnemyPatrolAI : MonoBehaviour
     private int currentPoint = 0;
 
     private Vector3 walkPoint;
+
+    private float waitTime = 0;
 
     private void Start()
     {
@@ -33,15 +36,23 @@ public class EnemyPatrolAI : MonoBehaviour
         else navmeshAgent.SetDestination(walkPoint);
         
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        Debug.Log(walkPoint);
         if (distanceToWalkPoint.magnitude < 1f)
         {
-            Debug.Log("Walkpoint reached");
-            walkPointSet = false;
             currentPoint++;
-            Debug.Log("Size of List: "  + patrolPoints.Count + " CurrentIndex: " + currentPoint);
             if (currentPoint >= patrolPoints.Count) {currentPoint = 0;}
+
+            if (shouldWaitOnWalkPoints)
+            {
+                StartCoroutine("WaitOnWalkPoint");
+            }
+            else walkPointSet = false;
         }
+    }
+
+    IEnumerator WaitOnWalkPoint()
+    {
+        yield return new WaitForSeconds(1f);
+        walkPointSet = false; 
     }
     private void SearchWalkPoint()
     {
