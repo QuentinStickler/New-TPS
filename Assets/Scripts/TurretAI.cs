@@ -10,6 +10,7 @@ public class TurretAI : MonoBehaviour
     private bool isAttacking = false;
     private GameObject player;
     public List<Transform> bulletSpawnPoints;
+    private bool isPlayerDead;
 
     public GameObject bullet;
 
@@ -21,11 +22,13 @@ public class TurretAI : MonoBehaviour
 
     private void Update()
     {
-        if(!isAttacking)StartCoroutine(AttackPlayer());
+        isPlayerDead = player.GetComponent<PlayerHealth>().GetisDead();
+        if(!isAttacking && !isPlayerDead)StartCoroutine(AttackPlayer());
     }
 
     IEnumerator AttackPlayer()
     {
+        
         Debug.Log("Turret attacking");
         isAttacking = true;
         foreach (var turretSpots in bulletSpawnPoints)

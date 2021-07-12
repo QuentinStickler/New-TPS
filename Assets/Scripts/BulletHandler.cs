@@ -14,6 +14,8 @@ public class BulletHandler : MonoBehaviour
         if (collision.gameObject.CompareTag("Player")) {
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
-        Destroy(this.gameObject);
+
+        Destroy(this.gameObject.GetComponent<Rigidbody>());
+        Destroy(this.gameObject,1.5f);
     }
 }

@@ -78,7 +78,9 @@ public class PlayerShoot : MonoBehaviour
         if (!isReloading)
         {
             currentBulletAmount--;
-            Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            float x = Screen.width / 2;
+            float y = Screen.height / 2;
+            Ray ray = camera.ScreenPointToRay(new Vector3(x, y, 0f));
             RaycastHit hit;
             Vector3 targetPoint;
 
@@ -86,17 +88,16 @@ public class PlayerShoot : MonoBehaviour
             {
                 targetPoint = hit.point;
             }
-            else targetPoint = ray.GetPoint(75);
+            else targetPoint = ray.GetPoint(100);
 
             Vector3 distanceToPoint = targetPoint - shootingPoint.position;
 
-            GameObject bulletInstance = Instantiate(bullet, shootingPoint.position, Quaternion.Euler(-90,0,0));
+            GameObject bulletInstance = Instantiate(bullet, shootingPoint.position, Quaternion.Euler(90,0,0));
 
-            bulletInstance.transform.forward = distanceToPoint.normalized;
+            //bulletInstance.transform.forward = distanceToPoint.normalized;
 
-            Debug.Log(distanceToPoint.normalized);
             bulletInstance.GetComponent<Rigidbody>().AddForce(distanceToPoint.normalized * bulletSpeed, ForceMode.Impulse);
-            Debug.DrawRay(shootingPoint.transform.position,targetPoint,Color.green,3f);
+            Debug.DrawRay(shootingPoint.transform.position,distanceToPoint,Color.green,3f);
 
             Destroy(bulletInstance, 3f);
         }
