@@ -25,7 +25,7 @@ public class Die : MonoBehaviour
         
     }
 
-    private void Respawn()
+    public void Respawn()
     {
         player.GetComponent<PlayerHealth>().SetisDead(false);
         player.transform.position = respawnPoint.transform.position;

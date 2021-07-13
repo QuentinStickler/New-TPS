@@ -125,4 +125,5 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.SetBool("isGrounded", groundedPlayer);
     }
+    
 }

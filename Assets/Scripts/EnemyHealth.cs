@@ -3,22 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
     private float health = 100f;
+    private float startHealth;
     private PlayerShoot playerShoot;
     public bool isRespawnable;
+    public Image healthBar;
+    public Canvas healthBarCanvas;
+    private Camera mainCamera;
 
     private void Start()
     {
         playerShoot = GameObject.Find("Player").GetComponent<PlayerShoot>();
+        startHealth = health;
+        mainCamera = Camera.main;
     }
 
     public void TakeDamage(float amount)
     {
         health -= amount;
+        healthBar.fillAmount = health / startHealth;
         if (health <= 0) { Die(); }
+    }
+
+    private void Update()
+    {
+        healthBarCanvas.transform.LookAt(mainCamera.transform.position);
     }
 
     private void Die()
@@ -36,5 +49,6 @@ public class EnemyHealth : MonoBehaviour
     {
         this.gameObject.SetActive(true);
         health = 100f;
+        healthBar.fillAmount = health / startHealth;
     }
 }

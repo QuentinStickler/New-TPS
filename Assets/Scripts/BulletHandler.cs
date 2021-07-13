@@ -16,6 +16,7 @@ public class BulletHandler : MonoBehaviour
         }
 
         Destroy(this.gameObject.GetComponent<Rigidbody>());
-        Destroy(this.gameObject,1.5f);
+        Destroy(this.gameObject.GetComponent<MeshRenderer>());
+        Destroy(this.gameObject,1f);
     }
 }
