@@ -51,4 +51,20 @@ public class EnemyHealth : MonoBehaviour
         health = 100f;
         healthBar.fillAmount = health / startHealth;
     }
+
+    public void RegenHealth(float regenHealth)
+    {
+        health += regenHealth;
+        if (health > startHealth)
+        {
+            health = startHealth;
+        }
+        Debug.Log("Regenerated health:" + health);
+        healthBar.fillAmount = health / startHealth;
+    }
+
+    public float GetHealth()
+    {
+        return health;
+    }
 }
