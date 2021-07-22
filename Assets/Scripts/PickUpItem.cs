@@ -18,7 +18,7 @@ public class PickUpItem : MonoBehaviour
     
     void Update()
     {
-        transform.Rotate(new Vector3(0f, Time.deltaTime * degreesPerSecond, 0f), Space.World);
+        transform.Rotate(new Vector3(0f, Time.deltaTime * degreesPerSecond, 0f), Space.Self);
         
         tempPos = posOffset;
         tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI/2 * frequency) * amplitude;
